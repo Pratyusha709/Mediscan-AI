@@ -42,3 +42,14 @@ MediScan AI is an AI-powered medicine information system that detects medicine n
 - check availability through graph
 - locate nearby medical stores by live map
 - Interact with an AI assistant through a single platform.
+<img width="1918" height="907" alt="Screenshot 2026-05-19 195057" src="https://github.com/user-attachments/assets/d5622549-f0b4-40bd-b036-0641d6894e5e" />
+<img width="1918" height="907" alt="Screenshot 2026-05-19 195150" src="https://github.com/user-attachments/assets/699ce5ba-b2df-4e05-856c-8ccdb4210560" />
+<img width="1918" height="907" alt="Screenshot 2026-05-19 195229" src="https://github.com/user-attachments/assets/ddc13032-0f90-4b45-abc1-a97babd0960b" />
+<img width="1918" height="907" alt="Screenshot 2026-05-19 195308" src="https://github.com/user-attachments/assets/88d69553-5d2a-4f5a-ae74-7efbff764d0e" />
+<img width="1918" height="907" alt="Screenshot 2026-05-19 195353" src="https://github.com/user-attachments/assets/213d053b-77f1-4cde-b45a-816e424365f1" />
+<img width="1918" height="912" alt="Screenshot 2026-05-19 195438" src="https://github.com/user-attachments/assets/93532ba4-4715-4f81-a721-947018b4b847" />
+
+
+
+
+

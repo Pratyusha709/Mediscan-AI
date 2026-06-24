@@ -1,16 +1,16 @@
 # Mediscan-AI
 MediScan AI is an AI-powered medicine information system that detects medicine names from uploaded images using OCR and provides details such as uses, side effects, price, availability graph, nearby medical stores, live map location, and AI chatbot assistance.
 # Features
-Medicine detection using OCR (Tesseract OCR)
-Upload medicine image and extract text
-Display medicine name, uses, and side effects
-Price calculation using NumPy
-Medicine availability visualization using Matplotlib
-Live map of nearby medical stores using Folium
-AI chatbot powered by Gemini 2.5 Flash
-User-friendly web interface using Flask
+- Medicine detection using OCR (Tesseract OCR)
+- Upload medicine image and extract text
+- Display medicine name, uses, and side effects
+- Price calculation using NumPy
+- Medicine availability visualization using Matplotlib
+- Live map of nearby medical stores using Folium
+- AI chatbot powered by Gemini 2.5 Flash
+- User-friendly web interface using Flask
 # Technologies Used
-Python
+- Python
 Flask
 OpenCV
 Pytesseract (Tesseract OCR)

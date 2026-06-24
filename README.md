@@ -1,5 +1,5 @@
 # Mediscan-AI
-MediScan AI is an AI-powered medicine information system that detects medicine names from uploaded images using OCR and provides details such as uses, side effects, price, availability graph, nearby medical stores, live map location, and AI chatbot assistance.
+MediScan AI is an AI-powered medicine information system that detects medicine names from uploaded images using OCR and provides details such as uses, side effects, price, availability graph, nearby medical stores, nearby clinics and hospital location, and AI chatbot assistance.
 # Features
 - Medicine detection using OCR (Tesseract OCR)
 - Upload medicine image and extract text

@@ -11,31 +11,34 @@ MediScan AI is an AI-powered medicine information system that detects medicine n
 - User-friendly web interface using Flask
 # Technologies Used
 - Python
-Flask
-OpenCV
-Pytesseract (Tesseract OCR)
-NumPy
-Matplotlib
-Folium
-OpenStreetMap
-Google Gemini API
-Files Used
-app.py → Main Flask application
-medicine_data.py → Medicine database
-price_calc.py → Price calculation using NumPy
-vendor_graph.py → Availability graph generation
-map_vendors.py → Live map generation
-chatbot.py → Gemini AI chatbot
-dashboard.html → Main dashboard interface
-welcome.html → Welcome page
+- Flask
+- OpenCV
+- Pytesseract (Tesseract OCR)
+- NumPy
+- Matplotlib
+- Folium
+- OpenStreetMap
+- Google Gemini API
+# Files Used
+- app.py → Main Flask application
+- medicine_data.py → Medicine database
+- price_calc.py → Price calculation using NumPy
+- vendor_graph.py → Availability graph generation
+- map_vendors.py → Live map generation
+- chatbot.py → Gemini AI chatbot
+- dashboard.html → Main dashboard interface
+- welcome.html → Welcome page
 # Learning Outcomes
-OCR and image processing
-AI chatbot integration
-Data visualization using Matplotlib
-Location-based services using Folium
-Flask web application development
-Python library integration
-User interface and backend integration
-Project Outcome
-
-MediScan AI provides a smart and easy way to identify medicines, view important information, check availability, locate nearby medical stores, and interact with an AI assistant through a single platform.
+- OCR and image processing
+- AI chatbot integration
+- Data visualization using Matplotlib
+- Location-based services using Folium
+- Flask web application development
+- Python library integration
+- User interface and backend integration
+# Project Outcome
+- MediScan AI provides a smart and easy way to identify medicines
+- view important information
+- check availability through graph
+- locate nearby medical stores by live map
+- Interact with an AI assistant through a single platform.

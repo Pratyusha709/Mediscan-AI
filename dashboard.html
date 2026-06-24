@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MediScan AI Dashboard</title>
+
+<style>
+
+/* Background */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+
+    background: linear-gradient(
+        -45deg,
+        #667eea,
+        #764ba2,
+        #6dd5ed,
+        #2193b0
+    );
+
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+}
+
+
+
+@keyframes gradientBG {
+
+    0% { background-position: 0% 50%; }
+
+    50% { background-position: 100% 50%; }
+
+    100% { background-position: 0% 50%; }
+
+}
+
+
+
+.container {
+    padding: 30px;
+    text-align: center;
+}
+
+
+
+h1 {
+    color: white;
+}
+
+
+
+.upload-box {
+
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+
+    padding: 30px;
+
+    width: 420px;
+    margin: auto;
+
+    border-radius: 20px;
+
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+
+}
+
+
+
+button {
+
+    margin-top: 20px;
+
+    padding: 12px 25px;
+
+    font-size: 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #00c6ff;
+    color: white;
+
+    cursor: pointer;
+
+}
+
+
+
+.features {
+
+    margin-top: 50px;
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    gap: 20px;
+
+}
+
+
+
+.block {
+
+    background: rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(12px);
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+
+.block:hover {
+
+    transform: scale(1.05);
+
+    background: rgba(255,255,255,0.25);
+
+}
+
+
+
+.popup {
+
+    display: none;
+
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    width: 350px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+
+}
+
+
+
+.close-btn {
+
+    background: red;
+
+    color: white;
+
+    border: none;
+
+    padding: 8px 15px;
+
+    margin-top: 15px;
+
+    cursor: pointer;
+
+}
+.popup img {
+    max-width: 100%;
+    height: auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Welcome {{ name }} 🎉</h1>
+
+<!-- Upload Section -->
+
+<div class="upload-box">
+
+<h2>Upload Medicine Image 💊</h2>
+
+<form action="/upload" method="post" enctype="multipart/form-data">
+
+<input type="file" name="medicine_image" required>
+
+<br>
+
+<button type="submit">
+
+Check Details 🔍
+
+</button>
+
+</form>
+
+</div>
+
+<!-- Feature Blocks -->
+
+<div class="features">
+
+<div class="block" onclick="showPopup('namePopup')">
+💊 Medicine Name
+</div>
+
+<div class="block" onclick="showPopup('contentPopup')">
+🧪 Contents
+</div>
+
+<div class="block" onclick="showPopup('usePopup')">
+📋 Applications
+</div>
+
+<div class="block" onclick="showPopup('sidePopup')">
+⚠️ Side Effects
+</div>
+
+<div class="block" onclick="showPopup('pricePopup')">
+� Price Information
+</div>
+
+<div class="block" onclick="showPopup('vendorPopup')">
+📊 Nearby Vendors
+</div>
+
+
+<div class="block" onclick="openGraphPopup()">
+📊 View Availability Graph
+</div>
+<div class="block" onclick="showPopup('chatPopup')">
+🤖 Chatbot
+</div>
+<div class="block" onclick="showPopup('buyPopup'); loadLiveLocation();">
+
+🛒 Nearby Clinics And hospitals
+
+</div>
+</div>
+</div>
+<!-- POPUPS -->
+
+<div id="namePopup" class="popup">
+<h3>Medicine Name</h3>
+<p>{{ medicine.name }}</p>
+<button class="close-btn" onclick="closePopup('namePopup')">Close</button>
+</div>
+
+<div id="contentPopup" class="popup">
+<h3>Main Content</h3>
+
+<p>{{ medicine.contents.main_content }}</p>
+
+<h3>Other Contents</h3>
+
+<ul>
+{% for content in medicine.contents.other_contents %}
+    <li>{{ content }}</li>
+{% endfor %}
+</ul>
+<button class="close-btn" onclick="closePopup('contentPopup')">Close</button>
+</div>
+
+<div id="usePopup" class="popup">
+<h3>Applications</h3>
+
+<ul>
+{% for application in medicine.applications %}
+    <li>{{ application }}</li>
+{% endfor %}
+</ul>
+<button class="close-btn" onclick="closePopup('usePopup')">Close</button>
+</div>
+
+<div id="sidePopup" class="popup">
+<h3>Side Effects</h3>
+<ul>
+{% for side_effect in medicine.side_effects %}
+    <li>{{ side_effect }}</li>
+{% endfor %}
+</ul>
+<button class="close-btn" onclick="closePopup('sidePopup')">Close</button>
+</div>
+
+<div id="pricePopup" class="popup">
+{% if price_data %}
+
+<h3>💊 Price Details</h3>
+
+<p>Price per tablet: ₹{{price_data.tablet_price}}</p>
+<p>Tablets per strip: {{price_data.tablets_per_strip}}</p>
+<p>Price of 1 strip: ₹{{price_data.strip_price}}</p>
+
+<ul>
+  <li>2 strips: ₹{{price_data.multi_strip_prices[1]}}</li>
+  <li>3 strips: ₹{{price_data.multi_strip_prices[2]}}</li>
+  <li>4 strips: ₹{{price_data.multi_strip_prices[3]}}</li>
+</ul>
+
+{% endif %}
+<button class="close-btn" onclick="closePopup('pricePopup')">Close</button>
+</div>
+
+<div id="vendorPopup" class="popup">
+<h3>Nearby Vendors</h3>
+<ul>
+{% for vendor in medicine.vendors %}
+    <li>{{ vendor }}</li>
+{% endfor %}
+</ul>
+<button class="close-btn" onclick="closePopup('vendorPopup')">Close</button>
+</div>
+
+<div id="buyPopup" class="popup">
+
+<h3>Nearby Clinics And Hospitals</h3>
+
+<iframe 
+    id="mapFrame"
+    src="/static/vendor_map.html"
+    width="100%"
+    height="400px"
+    style="border:none;">
+</iframe>
+
+<button class="close-btn" onclick="closePopup('buyPopup')">
+Close
+</button>
+
+</div>
+<div 
+    id="graphPopup" 
+    class="popup"
+    style="
+        width: 90%;
+        max-width: 1200px;
+        height: auto;
+    "
+>
+
+<h3>Availability Graph</h3>
+
+<img 
+    src="/static/vendor_graph.png" 
+    style="
+        width: 95%;
+        height: auto;
+        border-radius: 10px;
+    "
+>
+
+<br><br>
+
+<button class="close-btn" onclick="closePopup('graphPopup')">
+Close
+</button>
+</div>
+<div id="chatPopup" class="popup" style="display:none;">
+
+<h3>Chatbot</h3>
+
+<div id="chatBox" style="height:200px; overflow-y:auto; border:1px solid #ccc; padding:10px;"></div>
+
+<input type="text" id="userInput" placeholder="Ask something..." style="width:70%;">
+<button onclick="sendMessage()">Send</button>
+
+<br><br>
+
+<button onclick="closePopup('chatPopup')">Close</button>
+
+</div>
+<!-- JavaScript -->
+
+<script>
+
+function showPopup(id) {
+
+    document.getElementById(id).style.display = "block";
+
+}
+
+function closePopup(id) {
+
+    document.getElementById(id).style.display = "none";
+
+}
+
+</script>
+<script>
+
+function loadLiveLocation() {
+
+    if (navigator.geolocation) {
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+
+            // Send location to Flask
+            fetch('/update-location', {
+
+                method: 'POST',
+
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+
+                body: `lat=${lat}&lon=${lon}`
+
+            })
+            .then(response => response.text())
+            .then(data => {
+
+                // Reload map iframe
+                document.getElementById("mapFrame").src =
+                    "/static/vendor_map.html?" + new Date().getTime();
+
+            });
+
+        });
+
+    } else {
+
+        alert("Geolocation not supported");
+
+    }
+
+}
+
+</script>
+<script>
+
+function openGraphPopup() {
+
+    // 1️⃣ Open popup
+    showPopup('graphPopup');
+
+    // 2️⃣ Call backend (NO page redirect)
+    fetch('/get-graph')
+    .then(response => response.text())
+    .then(data => {
+
+        // 3️⃣ Reload image (avoid cache)
+        document.getElementById("graphImage").src =
+            "/static/vendor_graph.png?" + new Date().getTime();
+
+    });
+
+}
+
+</script>
+<script>
+
+// Open popup (if not already added)
+function showPopup(id) {
+    document.getElementById(id).style.display = "block";
+}
+
+function closePopup(id) {
+    document.getElementById(id).style.display = "none";
+}
+
+// Send message
+function sendMessage() {
+
+    let inputField = document.getElementById("userInput");
+    let input = inputField.value.trim();
+
+    let chatBox = document.getElementById("chatBox");
+
+    // ❌ Don't send empty message
+    if (input === "") return;
+
+    // Show user message
+    chatBox.innerHTML += "<p><b>You:</b> " + input + "</p>";
+
+    // Clear input
+    inputField.value = "";
+
+    // Auto scroll
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // Send to backend
+    fetch('/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: "message=" + encodeURIComponent(input)
+    })
+    .then(response => response.text())
+    .then(data => {
+
+        // Show bot reply
+        chatBox.innerHTML += "<p><b>Bot:</b> " + data + "</p>";
+
+        // Auto scroll again
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+    })
+    .catch(error => {
+
+        chatBox.innerHTML += "<p><b>Bot:</b> Error connecting to server</p>";
+
+    });
+}
+
+// Press Enter to send
+document.getElementById("userInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        sendMessage();
+    }
+});
+
+</script>
+<script>
+function showPopup(id) {
+    document.getElementById(id).style.display = "block";
+}
+
+function closePopup(id) {
+    document.getElementById(id).style.display = "none";
+}
+</script>
+
+</body>
+
+</html>

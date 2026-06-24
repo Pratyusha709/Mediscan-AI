@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MediScan AI Welcome</title>
+
+<style>
+
+
+
+body {
+
+    margin: 0;
+    height: 100vh;
+
+    font-family: 'Segoe UI', sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(
+        -45deg,
+        #4facfe,
+        #00f2fe,
+        #43e97b,
+        #38f9d7
+    );
+
+    background-size: 400% 400%;
+
+    animation: gradientBG 10s ease infinite;
+
+}
+
+
+
+@keyframes gradientBG {
+
+    0% { background-position: 0% 50%; }
+
+    50% { background-position: 100% 50%; }
+
+    100% { background-position: 0% 50%; }
+
+}
+
+
+
+.card {
+
+    background: rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(15px);
+
+    padding: 50px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    width: 400px;
+
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+
+    animation: fadeIn 1.2s ease;
+
+}
+
+
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+        transform: translateY(40px);
+
+    }
+
+    to {
+
+        opacity: 1;
+        transform: translateY(0);
+
+    }
+
+}
+
+
+
+h1 {
+
+    color: white;
+
+    font-size: 36px;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+.subtitle {
+
+    color: white;
+
+    font-size: 16px;
+
+    margin-bottom: 30px;
+
+}
+
+
+
+input {
+
+    width: 90%;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 16px;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+button {
+
+    background: #2e86de;
+
+    color: white;
+
+    padding: 12px 30px;
+
+    font-size: 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+
+button:hover {
+
+    background: #1b4f72;
+
+    transform: scale(1.05);
+
+}
+
+
+
+.footer {
+
+    margin-top: 20px;
+
+    font-size: 12px;
+
+    color: white;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>MediScan AI 💊</h1>
+
+    <p class="subtitle">
+
+        Smart Medicine Detection & Safety Dashboard
+
+    </p>
+
+    <form action="/dashboard" method="post">
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Enter your name"
+            required
+        >
+
+        <br>
+
+        <button type="submit">
+
+            Proceed 🚀
+
+        </button>
+
+    </form>
+
+    <p class="footer">
+
+        AI Powered Medicine Safety System
+
+    </p>
+
+</div>
+
+</body>
+
+</html>
